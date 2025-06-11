@@ -39,7 +39,7 @@ export default function About() {
                     </thead>
                     <tbody className=" text-slate-800 dark:text-white">
                         {users.map((user) => (
-                            <tr className="border-b border-slate-200 last:border-0">
+                            <tr key={user.id} className="border-b border-slate-200 last:border-0">
                                 <td className="p-3">{user.id}</td>
                                 <td className="p-3">{user.name}</td>
                                 <td className="p-3">{user.employed}</td>
