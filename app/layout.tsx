@@ -29,7 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider />
 
         <div className="w-full min-h-screen flex flex-col transition-colors duration-200">
-          <nav className="bg-blue-500 dark:bg-blue-900 shadow-md">
+          <nav className="bg-blue-500 dark:bg-blue-900 shadow-md sticky top-0">
             <div className="px-4 sm:px-6 lg:px-8">
               <div className="flex justify-between h-14">
                 <div className="flex items-center">
@@ -74,7 +74,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main>
             {children}
           </main>
-          <footer className="bg-gray-100 dark:bg-gray-800 mt-auto">
+          <footer className="bg-gray-100 dark:bg-gray-800 mt-auto sticky bottom-0">
             <div className="px-4 sm:px-6 lg:px-8 py-6">
               <div className="flex justify-between items-center">
                 <div className="text-gray-600 dark:text-gray-300 text-sm">
