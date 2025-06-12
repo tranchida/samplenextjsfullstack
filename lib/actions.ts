@@ -9,7 +9,10 @@ export async function setUserSwitchInactive(id: number): Promise<void> {
     })
     await prisma.user.update({
         where: { id },
-        data: { active: !user.active }
+        data: {
+            active: !user.active,
+            updatedAt: new Date(),
+        }
     })
 
     revalidateTag('users')
