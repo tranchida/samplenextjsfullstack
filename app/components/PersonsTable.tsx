@@ -1,8 +1,8 @@
 "use client"
 
-import { User } from "@prisma/client";
+import { Person } from "@/lib/types"
 
-export default function UserTable({ title, users , action}: { title: string, users: User[], action: (id: number) => Promise<void> }) {
+export default function PersonsTable({ title, persons , action}: { title: string, persons: Person[], action: (id: number) => Promise<void> }) {
 
     return (    
 
@@ -36,18 +36,18 @@ export default function UserTable({ title, users , action}: { title: string, use
                         </tr>
                     </thead>
                     <tbody className=" text-slate-800 dark:text-white">
-                        {users.map((user) => (
-                            <tr key={user.id} className="border-b border-slate-200 last:border-0">
-                                <td className="p-3">{user.id}</td>
-                                <td className="p-3">{user.firstname}</td>
-                                <td className="p-3">{user.lastname}</td>
-                                <td className="p-3">{user.employed}</td>
-                                <td className="p-3">{user.date}</td>
-                                <td className="p-3">{user.active ? "Yes" : "No"}</td>
+                        {persons.map((person) => (
+                            <tr key={person.id} className="border-b border-slate-200 last:border-0">
+                                <td className="p-3">{person.id}</td>
+                                <td className="p-3">{person.firstname}</td>
+                                <td className="p-3">{person.lastname}</td>
+                                <td className="p-3">{person.employed}</td>
+                                <td className="p-3">{person.date}</td>
+                                <td className="p-3">{person.active ? "Yes" : "No"}</td>
                                 <td className="p-3">
                                     <button className="bg-black text-white px-4 py-2 rounded-md hover:bg-indigo-600 hover:cursor-pointer"
 
-                                            onClick={() => action(user.id)}>
+                                            onClick={() => action(person.id)}>
                                         &#128259; active
                                     </button>
                                 </td>

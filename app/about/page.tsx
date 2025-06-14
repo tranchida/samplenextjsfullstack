@@ -1,21 +1,22 @@
-import { User } from "@prisma/client"
-import { getDevelopers, getManagers } from "../models"
-import UserTable from "../components/UserTable"
+
+import { getDevelopers, getManagers } from "../../lib/models"
+import PersonsTable from "../components/PersonsTable"
 import { setUserSwitchInactive } from "@/lib/actions"
+import { Person } from "@/lib/types"
 
 next: {
-    tags: ['users']
+    tags: ['persons']
 }
 
 export default async function About() {
 
-    const managers: User[] = await getManagers()
-    const developers: User[] = await getDevelopers()
+    const managers: Person[] = await getManagers()
+    const developers: Person[] = await getDevelopers()
 
     return (
         <>
-            <UserTable title="Managers" users={managers} action={setUserSwitchInactive}/>
-            <UserTable title="Developers" users={developers} action={setUserSwitchInactive}/>
+            <PersonsTable title="Managers" persons={managers} action={setUserSwitchInactive}/>
+            <PersonsTable title="Developers" persons={developers} action={setUserSwitchInactive}/>
         </>
     )
  }

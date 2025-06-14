@@ -1,18 +1,18 @@
 import { setUserSwitchInactive } from "@/lib/actions"
-import UserTable from "../components/UserTable"
-import { getUsers } from "../models"
+import { getPersons } from "../../lib/models"
+import PersonsTable from "../components/PersonsTable"
 
 next: {
-    tags: ['users']
+    tags: ['persons']
 }
 
 export default async function Admin() {
 
-    const users = await getUsers()
+    const users = await getPersons()
 
     return (
         <>
-            <UserTable title="Users" users={users} action={setUserSwitchInactive} />
+            <PersonsTable title="Persons" persons={users} action={setUserSwitchInactive} />
         </>
     )
 }

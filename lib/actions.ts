@@ -1,19 +1,17 @@
 'use server'
 
 import { revalidateTag } from "next/cache";
-import prisma from "./prisma";
+import { db } from "./database";
 
 export async function setUserSwitchInactive(id: number): Promise<void> {
-    const user = await prisma.user.findUniqueOrThrow({
-        where: { id },
-    })
-    await prisma.user.update({
-        where: { id },
-        data: {
-            active: !user.active,
-            updatedAt: new Date(),
-        }
-    })
+    const user = await db.selectFrom('person').selectAll().where('id', '=', id).executeTakeFirst()
+    if (!user) {
+        throw new Error('User not found')
+    }
+    await db.updateTable('person').set({
+        active: !user.active,
+        updatedAt: new Date(),
+    }).where('id', '=', id).execute()
 
-    revalidateTag('users')
+    revalidateTag('persons')
 }
