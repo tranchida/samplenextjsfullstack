@@ -1,7 +1,7 @@
 'use server'
 
 import { revalidateTag } from "next/cache";
-import prisma from "./prisma";
+import prisma from '@/lib/client'
 
 export async function setUserSwitchInactive(id: number): Promise<void> {
     const user = await prisma.user.findUniqueOrThrow({
