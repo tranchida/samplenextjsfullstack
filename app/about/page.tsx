@@ -1,4 +1,4 @@
-import { getDevelopers, getManagers } from "../models"
+import { getDevelopers, getManagers } from "../../lib/models"
 import UserTable from "../components/UserTable"
 import { setUserSwitchInactive } from "@/lib/actions"
 

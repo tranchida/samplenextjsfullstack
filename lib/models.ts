@@ -1,5 +1,5 @@
-import db from "../lib/client";
-import { usersTable } from "../lib/schema";
+import db from "./client";
+import { usersTable } from "./schema";
 import { asc, eq } from "drizzle-orm";
 
 export async function getUsers() {
