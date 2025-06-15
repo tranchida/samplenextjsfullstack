@@ -1,6 +1,6 @@
-import { PrismaClient } from '@prisma/client'
-import { withAccelerate } from '@prisma/extension-accelerate';
+import { drizzle } from "drizzle-orm/node-postgres"
+import 'dotenv/config'; 
 
-const prisma = new PrismaClient().$extends(withAccelerate());
+const db = drizzle(process.env.DATABASE_URL!);
 
-export default prisma;
+export default db;
