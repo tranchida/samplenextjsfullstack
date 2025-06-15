@@ -33,12 +33,20 @@ async function main() {
         { firstname: "Timothy", lastname: "Wright", employed: "Executive", date: "12/09/19" },
         { firstname: "Laura", lastname: "Scott", employed: "Developer", date: "01/01/22" },
         { firstname: "Andrew", lastname: "Young", employed: "Manager", date: "24/06/20" },
-        { firstname: "Katherine", lastname: "Adams", employed: "Developer", date: "15/11/21" },
+        { firstname: "Katherine", lastname: "Adams", employed: "Developer", date: "15/11/21", 
+            comments: {
+                create: [
+                    { comment: "Comment 1" },
+                    { comment: "Comment 2" },
+                    { comment: "Comment 3" }
+                ]
+            }
+        },
     ]
 
-    const userToDelete = await prisma.user.findMany()
+    const userToDelete = await prisma.users.findMany()
     for (const user of userToDelete) {
-        await prisma.user.delete({
+        await prisma.users.delete({
             where: {
                 id: user.id
             }
@@ -46,10 +54,11 @@ async function main() {
     }
 
     for (const user of users) {
-        await prisma.user.create({
+        await prisma.users.create({
             data: user
         })
     }
+
 }
 
 main()

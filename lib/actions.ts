@@ -4,10 +4,10 @@ import { revalidateTag } from "next/cache";
 import prisma from '@/lib/client'
 
 export async function setUserSwitchInactive(id: number): Promise<void> {
-    const user = await prisma.user.findUniqueOrThrow({
+    const user = await prisma.users.findUniqueOrThrow({
         where: { id },
     })
-    await prisma.user.update({
+    await prisma.users.update({
         where: { id },
         data: {
             active: !user.active,

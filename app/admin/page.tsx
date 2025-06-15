@@ -1,6 +1,6 @@
 import { setUserSwitchInactive } from "@/lib/actions"
 import UserTable from "../components/UserTable"
-import { getUsers } from "../models"
+import { getUsers } from "@/lib/models"
 
 next: {
     tags: ['users']

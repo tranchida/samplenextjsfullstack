@@ -1,9 +1,10 @@
 "use client"
 
-import { User } from "@prisma/client";
+import { UserWithComments } from "@/lib/models"
+import CommentTable from "./CommentTable"
 
-export default function UserTable({ title, users , action}: { title: string, users: User[], action: (id: number) => Promise<void> }) {
-
+export default function UserTable({ title, users , action}: { title: string, users: UserWithComments[], action: (id: number) => Promise<void> }) {
+    
     return (    
 
         <div>
@@ -28,6 +29,9 @@ export default function UserTable({ title, users , action}: { title: string, use
                                 Date
                             </th>
                             <th className="p-3 text-start font-medium">
+                                Comments count
+                            </th>
+                            <th className="p-3 text-start font-medium">
                                 Active
                             </th>
                             <th className="p-3 text-start font-medium">
@@ -43,6 +47,9 @@ export default function UserTable({ title, users , action}: { title: string, use
                                 <td className="p-3">{user.lastname}</td>
                                 <td className="p-3">{user.employed}</td>
                                 <td className="p-3">{user.date}</td>
+                                <td className="p-3" >
+                                    <CommentTable comments={user.comments} />
+                                </td>
                                 <td className="p-3">{user.active ? "Yes" : "No"}</td>
                                 <td className="p-3">
                                     <button className="bg-black text-white px-4 py-2 rounded-md hover:bg-indigo-600 hover:cursor-pointer"
