@@ -1,9 +1,15 @@
+import { revalidateTag } from "next/cache"
 import UserTable from "../components/UserTable"
 import { getUsers, switchUserActive } from "@/lib/models"
+
+next: {
+    tags: ['users'] 
+}
 
 async function updateUserActive(id: number): Promise<void> {
     'use server'
     await switchUserActive(id)
+    revalidateTag('users')
 }
 
 export default async function Admin() {
