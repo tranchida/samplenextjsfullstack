@@ -1,8 +1,8 @@
 "use client"
 
-import { Comments } from "@prisma/client"
+import { comments } from "@prisma/client"
 
-export default function CommentTable({ comments }: { comments: Comments[] }) {
+export default function CommentTable({ comments }: { comments: comments[] }) {
 
 
     return (

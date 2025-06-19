@@ -1,20 +1,23 @@
-import { getDevelopers, getManagers, UserWithComments } from "../../lib/models"
+import { getUsers, switchUserActive } from "../../lib/models"
 import UserTable from "../components/UserTable"
-import { setUserSwitchInactive } from "../../lib/actions"
+import { revalidatePath } from "next/cache"
 
-next: {
-    tags: ['users']
+async function updateUserActive(id: number): Promise<void> {
+    'use server'
+    
+    await switchUserActive(id)
+    revalidatePath('/about')
 }
 
 export default async function About() {
 
-    const managers = await getManagers()
-    const developers = await getDevelopers()
+    const managers = await getUsers().then(users => users.filter(user => user.employed === "Manager"))
+    const developers = await getUsers().then(users => users.filter(user => user.employed === "Developer"))
 
     return (
         <>
-            <UserTable title="Managers" users={managers} action={setUserSwitchInactive}/>
-            <UserTable title="Developers" users={developers} action={setUserSwitchInactive}/>
+            <UserTable title="Managers" users={managers} action={updateUserActive}/>
+            <UserTable title="Developers" users={developers} action={updateUserActive}/>
         </>
     )
  }

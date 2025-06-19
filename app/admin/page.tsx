@@ -1,9 +1,11 @@
-import { setUserSwitchInactive } from "@/lib/actions"
 import UserTable from "../components/UserTable"
-import { getUsers } from "@/lib/models"
+import { getUsers, switchUserActive } from "@/lib/models"
+import { revalidatePath } from "next/cache"
 
-next: {
-    tags: ['users']
+async function updateUserActive(id: number): Promise<void> {
+    'use server'
+    await switchUserActive(id)
+    revalidatePath('/admin')
 }
 
 export default async function Admin() {
@@ -12,7 +14,7 @@ export default async function Admin() {
 
     return (
         <>
-            <UserTable title="Users" users={users} action={setUserSwitchInactive} />
+            <UserTable title="Users" users={users} action={updateUserActive} />
         </>
     )
 }

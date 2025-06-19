@@ -1,8 +1,8 @@
 import prisma from '@/lib/client'
-import { Comments, Users } from '@prisma/client'
+import { comments, users } from '@prisma/client'
 
-export type UserWithComments = Users & {
-    comments: Comments[]
+export type UserWithComments = users & {
+    comments: comments[]
 }
 
 export async function getUsers(): Promise<UserWithComments[]> {
@@ -31,39 +31,21 @@ export async function getUser(id: number): Promise<UserWithComments | undefined>
 }
 
 
-export async function getManagers(): Promise<UserWithComments[]> {
-    const managers = await prisma.users.findMany({
-        where: { employed: "Manager" },
-        orderBy: [
-            { lastname: "asc" },
-            { firstname: "asc" }
-        ],
-        include: {
-            comments: true
-        }
-    })
-    return managers as UserWithComments[]
-}
-
-export async function getDevelopers(): Promise<UserWithComments[]> {
-    const developers = await prisma.users.findMany({
-        where: { employed: "Developer" },
-        orderBy: [
-            { lastname: "asc" },
-            { firstname: "asc" }
-        ],
-        include: {
-            comments: true
-        }
-    })
-    return developers as UserWithComments[]
-} 
-
-export async function commentByUser(userId: number): Promise<Comments[]> {
+export async function commentByUser(userId: number): Promise<comments[]> {
     const comments = await prisma.comments.findMany({
         where: {
             userId: userId
         }
     })
-    return comments as Comments[]
+    return comments as comments[]
+}
+
+export async function switchUserActive(id: number): Promise<void> {
+    const user = await prisma.users.findUniqueOrThrow({
+        where: { id },
+    })
+    await prisma.users.update({
+        where: { id },
+        data: { active: !user.active, updatedAt: new Date() }
+    })
 }
