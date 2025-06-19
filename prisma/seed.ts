@@ -44,14 +44,6 @@ async function main() {
         },
     ]
 
-    const userToDelete = await prisma.users.findMany()
-    for (const user of userToDelete) {
-        await prisma.users.delete({
-            where: {
-                id: user.id
-            }
-        })
-    }
 
     for (const user of users) {
         await prisma.users.create({
