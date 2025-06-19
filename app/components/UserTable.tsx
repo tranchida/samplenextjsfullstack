@@ -3,10 +3,13 @@
 import { UserWithComments } from "@/lib/models"
 import CommentTable from "./CommentTable"
 import { PiUserSwitch } from "react-icons/pi";
+import { useRouter } from "next/navigation";
 
 
 export default function UserTable({ title, users , action}: { title: string, users: UserWithComments[], action: (id: number) => Promise<void> }) {
-    
+
+    const router = useRouter()
+
     return (    
 
         <div>
@@ -55,7 +58,7 @@ export default function UserTable({ title, users , action}: { title: string, use
                                 <td className={`p-3 transition-colors duration-300 ${user.active ? "text-green-500" : "text-red-500"}`}>{user.active ? "Yes" : "No"}</td>
                                 <td className="p-3">
                                     <button className="bg-gray-500 text-white px-4 py-1 rounded-md hover:bg-indigo-600 hover:cursor-pointer"
-                                            onClick={() => action(user.id)}>
+                                            onClick={() => { action(user.id); router.refresh() }}>
                                         <PiUserSwitch color="black" size={20}/>
                                     </button>
                                 </td>

@@ -1,12 +1,9 @@
 import { getUsers, switchUserActive } from "../../lib/models"
 import UserTable from "../components/UserTable"
-import { revalidatePath } from "next/cache"
 
 async function updateUserActive(id: number): Promise<void> {
     'use server'
-    
     await switchUserActive(id)
-    revalidatePath('/about')
 }
 
 export default async function About() {
