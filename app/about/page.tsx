@@ -1,11 +1,13 @@
 import { getUsers, switchUserActive } from "../../lib/models"
 import UserTable from "../components/UserTable"
-import { revalidateTag } from "next/cache"
+import { revalidatePath } from "next/cache"
+
+export const revalidate = 0
 
 async function updateUserActive(id: number): Promise<void> {
     'use server'
     await switchUserActive(id)
-    revalidateTag('users')
+    revalidatePath('/about')
 }
 
 export default async function About() {
