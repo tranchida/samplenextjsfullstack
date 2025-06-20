@@ -3,6 +3,7 @@ import "./globals.css";
 import Link from "next/link";
 import { Metadata } from "next";
 import { ThemeProvider } from "./components/ThemeProvider";
+import Image from "next/image";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,7 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <div className="flex items-center">
                   <Link href="/">
                     <div className="flex items-center space-x-2">
-                      <img src="/next.svg" alt="logo" className="h-30 w-30" />
+                      <Image src="/next.svg" alt="logo" className="h-30 w-30" />
                       <span className="text-white text-3xl font-bold">Sample</span>
                     </div>
                   </Link>
