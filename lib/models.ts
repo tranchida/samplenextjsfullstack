@@ -1,5 +1,6 @@
 import prisma from '@/lib/client'
 import { comments, users } from '@prisma/client'
+import { revalidateTag } from 'next/cache'
 
 export type UserWithComments = users & {
     comments: comments[]
@@ -17,6 +18,7 @@ export async function getUsers(): Promise<UserWithComments[]> {
         ],
         take: 100
     })
+
     return users as UserWithComments[]
 }
 
@@ -48,4 +50,5 @@ export async function switchUserActive(id: number): Promise<void> {
         where: { id },
         data: { active: !user.active, updatedAt: new Date() }
     })
+    revalidateTag('users')
 }
