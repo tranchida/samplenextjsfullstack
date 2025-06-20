@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "pnpm drizzle-kit generate && pnpm db:seed",
+    "postinstall": "pnpm drizzle-kit push && pnpm db:seed",
     "db:seed": "tsx drizzle/seed.ts"
   },
   "dependencies": {
