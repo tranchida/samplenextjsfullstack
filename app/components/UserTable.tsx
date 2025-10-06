@@ -4,9 +4,8 @@ import { UserWithComments } from "@/lib/models"
 import CommentTable from "./CommentTable"
 import { PiUserSwitch } from "react-icons/pi";
 
-
 export default function UserTable({ title, users , action}: { title: string, users: UserWithComments[], action: (id: number) => Promise<void> }) {
-    
+
     return (    
 
         <div>
