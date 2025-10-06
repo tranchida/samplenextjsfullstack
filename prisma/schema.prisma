@@ -1,6 +1,6 @@
 generator client {
   provider = "prisma-client-js"
-  //previewFeatures = ["relationJoins"]
+  // previewFeatures = ["relationJoins"]
 }
 
 datasource db {
@@ -8,13 +8,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model users {
   id        Int        @id @default(autoincrement())
   firstname String
   lastname  String
   employed  String
   date      String
+  birthdate DateTime   @default(now())
   active    Boolean    @default(true)
   createdAt DateTime   @default(now())
   updatedAt DateTime   @default(now())
