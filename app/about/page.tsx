@@ -1,4 +1,4 @@
-import { getUsers, switchUserActive } from "../../lib/models"
+import { getUsers, switchUserActive } from "@/lib/models"
 import UserTable from "../components/UserTable"
 
 export const revalidate = 0
