@@ -1,12 +1,6 @@
 import UserTable from "../components/UserTable"
-import { getUsers, switchUserActive } from "@/lib/models"
-
-export const revalidate = 0
-
-async function updateUserActive(id: number): Promise<void> {
-    'use server'
-    await switchUserActive(id)
-}
+import { getUsers } from "@/lib/models"
+import { updateUserActive } from "@/lib/actions"
 
 export default async function Admin() {
     const users = await getUsers()
