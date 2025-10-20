@@ -2,7 +2,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
 import { Metadata } from "next";
-import { ThemeProvider } from "./components/ThemeProvider";
 import Image from "next/image";
 
 const geistSans = Geist({
@@ -27,8 +26,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-gray-900`}
       >
-        <ThemeProvider />
-
         <div className="w-full min-h-screen flex flex-col transition-colors duration-200">
           <nav className="bg-blue-500 dark:bg-blue-900 shadow-md sticky top-0">
             <div className="px-4 sm:px-6 lg:px-8">
