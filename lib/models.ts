@@ -1,25 +1,33 @@
 import prisma from '@/lib/client'
 import { comments, users } from '@prisma/client'
-import { revalidateTag } from 'next/cache'
+import { revalidateTag, unstable_cache } from 'next/cache'
 
 export type UserWithComments = users & {
     comments: comments[]
 }
 
 export async function getUsers(): Promise<UserWithComments[]> {
+    return unstable_cache(
+        async () => {
+            const users = await prisma.users.findMany({
+                include: {
+                    comments: true
+                },
+                orderBy: [
+                    { lastname: "asc" },
+                    { firstname: "asc" }
+                ],
+                take: 100
+            })
 
-    const users = await prisma.users.findMany({
-        include: {
-            comments: true
+            return users as UserWithComments[]
         },
-        orderBy: [
-            { lastname: "asc" },
-            { firstname: "asc" }
-        ],
-        take: 100
-    })
-
-    return users as UserWithComments[]
+        ['users-list'], // Cache key
+        {
+            tags: ['users'], // Le tag que vous utilisez dans revalidateTag
+            revalidate: 3600 // Optionnel: revalidation automatique après 1 heure
+        }
+    )()
 }
 
 export async function getUser(id: number): Promise<UserWithComments | undefined> {
